@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>интерактивный список без дубликатов</title>
+</head>
+<style>
+body {
+    background-color: black;
+            font-family: Times;
+            margin: 300px;
+            margin-left:550px;
+
+        }
+        
+        input {
+            text-align: center;
+             border: 10px solid;
+    border-image: linear-gradient(
+        to right,
+        red,
+        orange,
+        yellow,
+        green,
+        blue,
+        indigo,
+        violet
+    ) 1;
+            
+            padding:5px;
+            width: 200px;
+
+        }
+        
+        button {
+            padding: 5px 10px;
+            margin-left: 10px;
+        }
+        
+        ol {
+            margin-top: 20px;
+            
+        }
+        
+        li {
+            margin: 5px 0;
+            color:chocolate;
+        }
+    </style>
+<body>
+    <input type="text" id="myPUT" placeholder="Введите текст">
+    <button type="button" id="MYbaton">Добавить!
+    </button>
+    <o id="Mylist"></ol>
+        <script>
+            //Прописываем эелементы с html
+            let inputField = document.getElementById('myPUT');
+            let addButton = document.getElementById('MYbaton');
+            let list = document.getElementById('Mylist');
+
+           function addItem() {
+
+            let text = inputField.value;
+
+        text = text.trim();
+        if (text === "") {
+            alert("ЖДУ ТЕКСТА!");
+            return;
+        }
+
+        let allItems = list.getElementsByTagName('li');
+        let isDuplicate = false;
+
+        for (let i = 0; i < allItems.length; i++) {
+
+            if (allItems[i].textContent.toLowerCase() === text.toLowerCase()) {
+                isDuplicate = true;
+                    break;
+        
+            }
+        }
+        if (isDuplicate) {
+            alert('Данный Элемент Уже Присутствует в списке');
+            return;
+        }
+        let newItem = document.createElement('li');
+        newItem.textContent = text;
+   //Список (ol) принимает нового «жильца»:
+        list.appendChild(newItem);
+
+        inputField.value = '';
+    }
+    
+
+        addButton.addEventListener('click', addItem);
+        inputField.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                addItem();
+            }
+            
+        });
+        
+    
+        </script>
+
+</body>
+</html>
